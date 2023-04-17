@@ -16,10 +16,12 @@ export class BinaryTree<G> implements Tree<G> {
             this.totalNode ++;
             return this.root;
         } else {
-            let node = new TreeNode(data);
+            let node = new TreeNode<G>(data);
             let currentNode = this.root;
             while (currentNode) {
-                if (data <= currentNode.data) {
+                if (data === currentNode.data) {
+                    throw new Error('Node data existed')
+                } else if (data < currentNode.data) {
                     if (!currentNode.left) {
                         currentNode.left = node;
                         break;
@@ -28,7 +30,7 @@ export class BinaryTree<G> implements Tree<G> {
                 } else {
                     if (!currentNode.right) {
                         currentNode.right = node;
-                        break
+                        break;
                     }
                     currentNode = currentNode.right;
                 }
